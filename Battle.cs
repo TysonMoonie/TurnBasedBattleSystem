@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace BattleEngine
 {
@@ -9,11 +10,16 @@ namespace BattleEngine
 
         public BattleState state;
 
-        public Player playerInstance;
-        public Enemy enemyInstance;
+        public List<Player> players;
+        public List<Enemy> enemies;
+
+        public Player player_one;
+        public Player player_two;
+        public Enemy enemy_one;
 
         public Random RandomNumberGenerator;
         public int RandomValue;
+        public int TargetValue;
 
         public void Start()
         {
@@ -21,44 +27,39 @@ namespace BattleEngine
             SetupBattle();
         }
 
-        void displayCurrentBattleState(Player player, Enemy enemy)
+        void displayCurrentBattleState(Player player_one, Player player_two, Enemy enemy)
         {
-            if (player == null | enemy == null)
+            if (player_one == null | player_two == null | enemy == null)
             {
                 Console.WriteLine("ERROR. CANNOT DISPLAY VALUES.");
             }
             else
             {
-                Console.WriteLine("Player:\t\t\tEnemy:");
-                Console.WriteLine(player.getPlayerName()+"\t\t\t"+ enemy.getEnemyName());
-                Console.WriteLine("Current HP: " + player.getCurrentPlayerHP() + "\t\tCurrent HP: " + enemy.getCurrentEnemyHP());
-                Console.WriteLine("Current MP: " + player.getCurrentPlayerMP() + "\t\tCurrent MP: " + enemy.getCurrentEnemyMP()+"\n");
+                Console.WriteLine("Player:\t\t\tPlayer:\t\t\tEnemy:");
+                Console.WriteLine(player_one.getPlayerName()+"\t\t\t"+ player_two.getPlayerName() + "\t\t\t" + enemy.getEnemyName());
+                Console.WriteLine("Current HP: " + player_one.getCurrentPlayerHP() + "\t\tCurrent HP: " + player_two.getCurrentPlayerHP() + "\t\tCurrent HP: " + enemy.getCurrentEnemyHP());
+                Console.WriteLine("Current MP: " + player_one.getCurrentPlayerMP() + "\t\tCurrent MP: " + player_two.getCurrentPlayerMP() + "\t\tCurrent MP: " + enemy.getCurrentEnemyMP()+"\n");
             }
         }
 
 
         void SetupBattle()
         {
-            //                            Name   LV  HP  HP  MP  MP DEF SPEED
-            playerInstance = new Player("Aerin", 10, 40, 40, 25, 25, 0, 5);
-            enemyInstance   = new Enemy("Cleigh",12, 50, 50, 20, 20, 0, 3);
+            //                             Name   LV  HP  HP  MP  MP DEF SPEED
+            player_one      = new Player("Aerin", 10, 40, 40, 25, 25, 0, 9);
+            player_two      = new Player("Luna",  10, 35, 35, 40, 40, 0, 7);
+            enemy_one        = new Enemy("Cleigh",12, 80, 80, 30, 30, 0, 3);
 
-
-
-            AttackAdapter.loadPlayerAttacks();
-            AttackAdapter.loadEnemyAttacks();
-
-
-            Console.WriteLine("You've encountered " + enemyInstance.getEnemyName() + "!\n");
+            Console.WriteLine("You've encountered " + enemy_one.getEnemyName() + "!\n");
 
             //One second timer
             System.Threading.Thread.Sleep(1000);
 
             //If Player is faster than enemy, player goes first.
-            if (playerInstance.getPlayerSpeed() > enemyInstance.getEnemySpeed())
+            if (player_one.getPlayerSpeed() > enemy_one.getEnemySpeed() | player_two.getPlayerSpeed() > enemy_one.getEnemySpeed())
             {
                 state = BattleState.PLAYERTURN;
-                PlayerTurn();
+                PlayerTurn(player_one);
             }
             else
             {
@@ -67,117 +68,243 @@ namespace BattleEngine
             }
         }
 
-        void PlayerTurn()
+        void PlayerTurn(Player player)
         {
-            displayCurrentBattleState(playerInstance, enemyInstance);
+            displayCurrentBattleState(player_one, player_two, enemy_one);
+
+            string attackChoice = "";
+
+            Console.WriteLine("---------------------\n" + "|   " + player.getPlayerName() + "'s turn!   |\n" + "---------------------\n");
 
 
-
-            Console.WriteLine("---------------------\n" + "|   " + playerInstance.getPlayerName() + "'s turn!   |\n" + "---------------------\n");
-
-
-
-
-            //Attack Phase
-            Console.WriteLine("Select an action (Bow/Bomb Arrows/Heal/Super Heal):");
-            string attackChoice = Console.ReadLine();
-
-            if (attackChoice.Equals("Bow"))
+            if (player.getPlayerName().Equals("Aerin"))
             {
-                bool isEnemyDead = enemyInstance.TakesDamage(5);
-                Console.WriteLine(playerInstance.getPlayerName() + " attacks " + enemyInstance.getEnemyName() + " with a Bow!\n");
-                Console.WriteLine(enemyInstance.getEnemyName() + " took 4 damage!\n");
-                if (isEnemyDead == true)
+                while (!attackChoice.Equals("Bomb Arrows") |
+                       !attackChoice.Equals("Bow") |
+                       !attackChoice.Equals("Heal") |
+                       !attackChoice.Equals("Super Heal"))
                 {
-                    state = BattleState.WON;
-                    EndBattle();
-                }
-                else
-                {
-                    state = BattleState.ENEMYTURN;
-                    EnemyTurn();
+
+                    //Attack Phase
+                    Console.WriteLine("Select an action (Bow/Bomb Arrows/Heal/Super Heal):");
+                    attackChoice = Console.ReadLine();
+
+
+                    if (attackChoice.Equals("Bow"))
+                    {
+                        bool isEnemyDead = enemy_one.TakesDamage(4);
+                        Console.WriteLine(player.getPlayerName() + " attacks " + enemy_one.getEnemyName() + " with a Bow!\n");
+                        Console.WriteLine(enemy_one.getEnemyName() + " took 4 damage!\n");
+                        if (isEnemyDead == true)
+                        {
+                            state = BattleState.WON;
+                            EndBattle();
+                            break;
+                        }
+                        else
+                        {
+                            state = BattleState.PLAYERTURN;
+                            PlayerTurn(player_two);
+                            break;
+                        }
+                    }
+                    else if (attackChoice.Equals("Bomb Arrows") & player.getCurrentPlayerMP() > 3)
+                    {
+                        player.setMP(player.getCurrentPlayerMP() - 4);
+                        bool isEnemyDead = enemy_one.TakesDamage(9);
+                        Console.WriteLine(player.getPlayerName() + " attacks " + enemy_one.getEnemyName() + " with Bomb Arrows!\n");
+                        Console.WriteLine(enemy_one.getEnemyName() + " took 9 damage!\n");
+                        if (isEnemyDead)
+                        {
+                            state = BattleState.WON;
+                            EndBattle();
+                            break;
+                        }
+                        else
+                        {
+                            state = BattleState.PLAYERTURN;
+                            PlayerTurn(player_two);
+                            break;
+                        }
+                    }
+                    else if (attackChoice.Equals("Heal") & player.getCurrentPlayerMP() > 2)
+                    {
+                        player.setMP(player.getCurrentPlayerMP() - 3);
+                        player.Heal(5);
+                        bool isEnemyDead = enemy_one.TakesDamage(0);
+                        Console.WriteLine(player.getPlayerName() + " used Heal!\n");
+                        Console.WriteLine(player.getPlayerName() + " regained 5 Health!\n");
+                        if (isEnemyDead)
+                        {
+                            state = BattleState.WON;
+                            EndBattle();
+                            break;
+                        }
+                        else
+                        {
+                            state = BattleState.PLAYERTURN;
+                            PlayerTurn(player_two);
+                            break;
+                        }
+                    }
+                    else if (attackChoice.Equals("Super Heal") & player_one.getCurrentPlayerMP() > 4)
+                    {
+                        player_one.setMP(player_one.getCurrentPlayerMP() - 5);
+                        player_one.Heal(10);
+                        bool isEnemyDead = enemy_one.TakesDamage(0);
+                        Console.WriteLine(player_one.getPlayerName() + " used Super Heal!\n");
+                        Console.WriteLine(player_one.getPlayerName() + " regained 10 Health!\n");
+                        if (isEnemyDead)
+                        {
+                            state = BattleState.WON;
+                            EndBattle();
+                            break;
+                        }
+                        else
+                        {
+                            state = BattleState.PLAYERTURN;
+                            PlayerTurn(player_two);
+                            break;
+                        }
+                    }
+                    else if (!attackChoice.Equals("Bomb Arrows") | !attackChoice.Equals("Bow") | !attackChoice.Equals("Heal") | !attackChoice.Equals("Super Heal"))
+                    {
+                        Console.WriteLine("Invalid Action.\n");
+                        continue;
+                    }
                 }
             }
-            else if (attackChoice.Equals("Bomb Arrows") & playerInstance.getCurrentPlayerMP() > 3)
+            if (player.getPlayerName().Equals("Luna"))
             {
-                playerInstance.setMP(playerInstance.getCurrentPlayerMP() - 4);
-                bool isEnemyDead = enemyInstance.TakesDamage(9);
-                Console.WriteLine(playerInstance.getPlayerName() + " attacks " + enemyInstance.getEnemyName() + " with Bomb Arrows!\n");
-                Console.WriteLine(enemyInstance.getEnemyName() + " took 9 damage!\n");
-                if (isEnemyDead)
+                while (!attackChoice.Equals("Dagger") |
+                       !attackChoice.Equals("Mirror Beam") |
+                       !attackChoice.Equals("Heal") |
+                       !attackChoice.Equals("Super Heal"))
                 {
-                    state = BattleState.WON;
-                    EndBattle();
-                }
-                else
-                {
-                    state = BattleState.ENEMYTURN;
-                    EnemyTurn();
+
+                    //Attack Phase
+                    Console.WriteLine("Select an action (Dagger/Mirror Beam/Heal/Super Heal):");
+                    attackChoice = Console.ReadLine();
+
+
+                    if (attackChoice.Equals("Dagger"))
+                    {
+                        bool isEnemyDead = enemy_one.TakesDamage(2);
+                        Console.WriteLine(player.getPlayerName() + " attacks " + enemy_one.getEnemyName() + " with a Dagger!\n");
+                        Console.WriteLine(enemy_one.getEnemyName() + " took 2 damage!\n");
+                        if (isEnemyDead == true)
+                        {
+                            state = BattleState.WON;
+                            EndBattle();
+                            break;
+                        }
+                        else
+                        {
+                            state = BattleState.ENEMYTURN;
+                            EnemyTurn();
+                            break;
+                        }
+                    }
+                    else if (attackChoice.Equals("Mirror Beam") & player.getCurrentPlayerMP() > 5)
+                    {
+                        player.setMP(player.getCurrentPlayerMP() - 6);
+                        bool isEnemyDead = enemy_one.TakesDamage(10);
+                        Console.WriteLine(player.getPlayerName() + " attacks " + enemy_one.getEnemyName() + " with Mirror Beam!\n");
+                        Console.WriteLine(enemy_one.getEnemyName() + " took 10 damage!\n");
+                        if (isEnemyDead)
+                        {
+                            state = BattleState.WON;
+                            EndBattle();
+                            break;
+                        }
+                        else
+                        {
+                            state = BattleState.ENEMYTURN;
+                            EnemyTurn();
+                            break;
+                        }
+                    }
+                    else if (attackChoice.Equals("Heal") & player.getCurrentPlayerMP() > 2)
+                    {
+                        player.setMP(player.getCurrentPlayerMP() - 3);
+                        player.Heal(5);
+                        bool isEnemyDead = enemy_one.TakesDamage(0);
+                        Console.WriteLine(player.getPlayerName() + " used Heal!\n");
+                        Console.WriteLine(player.getPlayerName() + " regained 5 Health!\n");
+                        if (isEnemyDead)
+                        {
+                            state = BattleState.WON;
+                            EndBattle();
+                            break;
+                        }
+                        else
+                        {
+                            state = BattleState.ENEMYTURN;
+                            EnemyTurn();
+                            break;
+                        }
+                    }
+                    else if (attackChoice.Equals("Super Heal") & player_one.getCurrentPlayerMP() > 4)
+                    {
+                        player_one.setMP(player_one.getCurrentPlayerMP() - 5);
+                        player_one.Heal(10);
+                        bool isEnemyDead = enemy_one.TakesDamage(0);
+                        Console.WriteLine(player_one.getPlayerName() + " used Super Heal!\n");
+                        Console.WriteLine(player_one.getPlayerName() + " regained 10 Health!\n");
+                        if (isEnemyDead)
+                        {
+                            state = BattleState.WON;
+                            EndBattle();
+                            break;
+                        }
+                        else
+                        {
+                            state = BattleState.ENEMYTURN;
+                            EnemyTurn();
+                            break;
+                        }
+                    }
+                    else if (!attackChoice.Equals("Dagger") | !attackChoice.Equals("Mirror Beam") | !attackChoice.Equals("Heal") | !attackChoice.Equals("Super Heal"))
+                    {
+                        Console.WriteLine("Invalid Action.\n");
+                        continue;
+                    }
                 }
             }
-            else if (attackChoice.Equals("Heal") & playerInstance.getCurrentPlayerMP() > 2)
-            {
-                playerInstance.setMP(playerInstance.getCurrentPlayerMP() - 3);
-                playerInstance.Heal(5);
-                bool isEnemyDead = enemyInstance.TakesDamage(0);
-                Console.WriteLine(playerInstance.getPlayerName() + " used Heal!\n");
-                Console.WriteLine(playerInstance.getPlayerName() + " regained 5 Health!\n");
-                if (isEnemyDead)
-                {
-                    state = BattleState.WON;
-                    EndBattle();
-                }
-                else
-                {
-                    state = BattleState.ENEMYTURN;
-                    EnemyTurn();
-                }
-            }
-            else if (attackChoice.Equals("Super Heal") & playerInstance.getCurrentPlayerMP() > 4)
-            {
-                playerInstance.setMP(playerInstance.getCurrentPlayerMP() - 5);
-                playerInstance.Heal(10);
-                bool isEnemyDead = enemyInstance.TakesDamage(0);
-                Console.WriteLine(playerInstance.getPlayerName() + " used Super Heal!\n");
-                Console.WriteLine(playerInstance.getPlayerName() + " regained 10 Health!\n");
-                if (isEnemyDead)
-                {
-                    state = BattleState.WON;
-                    EndBattle();
-                }
-                else
-                {
-                    state = BattleState.ENEMYTURN;
-                    EnemyTurn();
-                }
-            }
-            else
-                Console.WriteLine("Invalid action.");
+
 
         }
 
         void EnemyTurn()
         {
-            displayCurrentBattleState(playerInstance, enemyInstance);
+            displayCurrentBattleState(player_one, player_two, enemy_one);
 
             RandomNumberGenerator = new Random();
 
 
 
-            Console.WriteLine("---------------------\n" + "|   " + enemyInstance.getEnemyName() + "'s turn!   |\n" + "---------------------\n");
+            Console.WriteLine("---------------------\n" + "|   " + enemy_one.getEnemyName() + "'s turn!  |\n" + "---------------------\n");
 
             //One Second Timer
             System.Threading.Thread.Sleep(1000);
 
+            Player target;
+
             //Attack
             RandomValue = RandomNumberGenerator.Next(2);
+            TargetValue = RandomNumberGenerator.Next(2);
 
-            if (RandomValue == 0 & enemyInstance.getCurrentEnemyMP() > 1)
+            if (RandomValue == 0 & enemy_one.getCurrentEnemyMP() > 1)
             {
-                enemyInstance.setMP(enemyInstance.getCurrentEnemyMP() - 2);
-                bool isPlayerDead = playerInstance.TakesDamage(6);
-                Console.WriteLine(enemyInstance.getEnemyName() + " attacks "+playerInstance.getPlayerName()+" with Heavy Smash!\n");
-                Console.WriteLine(playerInstance.getPlayerName() + " took 6 damage!\n");
+                if (TargetValue == 0)
+                    target = player_one;
+                else
+                    target = player_two;
+
+                enemy_one.setMP(enemy_one.getCurrentEnemyMP() - 2);
+                bool isPlayerDead = target.TakesDamage(6);
+                Console.WriteLine(enemy_one.getEnemyName() + " attacks "+player_one.getPlayerName()+" with Heavy Smash!\n");
+                Console.WriteLine(target.getPlayerName() + " took 6 damage!\n");
                 if (isPlayerDead)
                 {
                     state = BattleState.LOST;
@@ -186,15 +313,20 @@ namespace BattleEngine
                 else
                 {
                     state = BattleState.PLAYERTURN;
-                    PlayerTurn();
+                    PlayerTurn(player_one);
                 }
             }
-            else if (RandomValue == 1 & enemyInstance.getCurrentEnemyMP()>5)
+            else if (RandomValue == 1 & enemy_one.getCurrentEnemyMP()>5)
             {
-                enemyInstance.setMP(enemyInstance.getCurrentEnemyMP()-6);
-                bool isPlayerDead = playerInstance.TakesDamage(12);
-                Console.WriteLine(enemyInstance.getEnemyName() + " attacks " + playerInstance.getPlayerName() + " with Magmatic Fusion!\n");
-                Console.WriteLine(playerInstance.getPlayerName() + " took 12 damage!\n");
+                if (TargetValue == 0)
+                    target = player_one;
+                else
+                    target = player_two;
+
+                enemy_one.setMP(enemy_one.getCurrentEnemyMP()-6);
+                bool isPlayerDead = target.TakesDamage(12);
+                Console.WriteLine(enemy_one.getEnemyName() + " attacks " + player_one.getPlayerName() + " with Magmatic Fusion!\n");
+                Console.WriteLine(target.getPlayerName() + " took 12 damage!\n");
                 if (isPlayerDead)
                 {
                     state = BattleState.LOST;
@@ -203,14 +335,19 @@ namespace BattleEngine
                 else
                 {
                     state = BattleState.PLAYERTURN;
-                    PlayerTurn();
+                    PlayerTurn(player_one);
                 }
             }
             else
             {
-                bool isPlayerDead = playerInstance.TakesDamage(4);
-                Console.WriteLine(enemyInstance.getEnemyName() + " attacks " + playerInstance.getPlayerName() + " with Punch!\n");
-                Console.WriteLine(playerInstance.getPlayerName() + " took 4 damage!");
+                if (TargetValue == 0)
+                    target = player_one;
+                else
+                    target = player_two;
+
+                bool isPlayerDead = target.TakesDamage(4);
+                Console.WriteLine(enemy_one.getEnemyName() + " attacks " + player_one.getPlayerName() + " with Punch!\n");
+                Console.WriteLine(target.getPlayerName() + " took 4 damage!");
                 if (isPlayerDead)
                 {
                     state = BattleState.LOST;
@@ -219,7 +356,7 @@ namespace BattleEngine
                 else
                 {
                     state = BattleState.PLAYERTURN;
-                    PlayerTurn();
+                    PlayerTurn(player_one);
                 }
             }
 
@@ -235,12 +372,12 @@ namespace BattleEngine
         {
             if (state == BattleState.WON)
             {
-                Console.WriteLine(enemyInstance.getEnemyName() + " has been defeated!\n");
+                Console.WriteLine(enemy_one.getEnemyName() + " has been defeated!\n");
                 Console.WriteLine("You gained 420xp\n\n");
             }
             else if (state == BattleState.LOST)
             {
-                Console.WriteLine("G A M E   O V E R\n\n");
+                Console.WriteLine("\n\nG A M E   O V E R\n\n");
             }
         }
     }
