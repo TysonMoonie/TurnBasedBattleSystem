@@ -318,16 +318,13 @@ namespace BattleEngine
             }
             else if (RandomValue == 1 & enemy_one.getCurrentEnemyMP()>5)
             {
-                if (TargetValue == 0)
-                    target = player_one;
-                else
-                    target = player_two;
-
+                
                 enemy_one.setMP(enemy_one.getCurrentEnemyMP()-6);
-                bool isPlayerDead = target.TakesDamage(12);
+                bool isPlayerOneDead = player_one.TakesDamage(12);
+                bool isPlayerTwoDead = player_one.TakesDamage(12);
                 Console.WriteLine(enemy_one.getEnemyName() + " attacks " + player_one.getPlayerName() + " with Magmatic Fusion!\n");
-                Console.WriteLine(target.getPlayerName() + " took 12 damage!\n");
-                if (isPlayerDead)
+                Console.WriteLine(player_one.getPlayerName() + " and " + player_two.getPlayerName() + " took 12 damage!\n");
+                if (isPlayerOneDead | isPlayerTwoDead)
                 {
                     state = BattleState.LOST;
                     EndBattle();
