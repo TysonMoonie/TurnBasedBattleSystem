@@ -48,7 +48,7 @@ namespace BattleEngine
             //                             Name   LV  HP  HP  MP  MP DEF SPEED
             player_one      = new Player("Aerin", 10, 40, 40, 25, 25, 0, 9);
             player_two      = new Player("Luna",  10, 35, 35, 40, 40, 0, 7);
-            enemy_one        = new Enemy("Cleigh",12, 80, 80, 30, 30, 0, 3);
+            enemy_one        = new Enemy("Cleigh",12, 70, 70, 30, 30, 0, 3);
 
             Console.WriteLine("You've encountered " + enemy_one.getEnemyName() + "!\n");
 
@@ -244,13 +244,13 @@ namespace BattleEngine
                             break;
                         }
                     }
-                    else if (attackChoice.Equals("Super Heal") & player_one.getCurrentPlayerMP() > 4)
+                    else if (attackChoice.Equals("Super Heal") & player.getCurrentPlayerMP() > 4)
                     {
-                        player_one.setMP(player_one.getCurrentPlayerMP() - 5);
-                        player_one.Heal(10);
+                        player.setMP(player_one.getCurrentPlayerMP() - 5);
+                        player.Heal(10);
                         bool isEnemyDead = enemy_one.TakesDamage(0);
-                        Console.WriteLine(player_one.getPlayerName() + " used Super Heal!\n");
-                        Console.WriteLine(player_one.getPlayerName() + " regained 10 Health!\n");
+                        Console.WriteLine(player.getPlayerName() + " used Super Heal!\n");
+                        Console.WriteLine(player.getPlayerName() + " regained 10 Health!\n");
                         if (isEnemyDead)
                         {
                             state = BattleState.WON;
@@ -303,7 +303,7 @@ namespace BattleEngine
 
                 enemy_one.setMP(enemy_one.getCurrentEnemyMP() - 2);
                 bool isPlayerDead = target.TakesDamage(6);
-                Console.WriteLine(enemy_one.getEnemyName() + " attacks "+player_one.getPlayerName()+" with Heavy Smash!\n");
+                Console.WriteLine(enemy_one.getEnemyName() + " attacks "+target.getPlayerName()+" with Heavy Smash!\n");
                 Console.WriteLine(target.getPlayerName() + " took 6 damage!\n");
                 if (isPlayerDead)
                 {
@@ -321,7 +321,7 @@ namespace BattleEngine
                 
                 enemy_one.setMP(enemy_one.getCurrentEnemyMP()-6);
                 bool isPlayerOneDead = player_one.TakesDamage(12);
-                bool isPlayerTwoDead = player_one.TakesDamage(12);
+                bool isPlayerTwoDead = player_two.TakesDamage(12);
                 Console.WriteLine(enemy_one.getEnemyName() + " attacks " + player_one.getPlayerName() + " with Magmatic Fusion!\n");
                 Console.WriteLine(player_one.getPlayerName() + " and " + player_two.getPlayerName() + " took 12 damage!\n");
                 if (isPlayerOneDead | isPlayerTwoDead)
@@ -343,7 +343,7 @@ namespace BattleEngine
                     target = player_two;
 
                 bool isPlayerDead = target.TakesDamage(4);
-                Console.WriteLine(enemy_one.getEnemyName() + " attacks " + player_one.getPlayerName() + " with Punch!\n");
+                Console.WriteLine(enemy_one.getEnemyName() + " attacks " + target.getPlayerName() + " with Punch!\n");
                 Console.WriteLine(target.getPlayerName() + " took 4 damage!");
                 if (isPlayerDead)
                 {
