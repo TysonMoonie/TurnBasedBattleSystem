@@ -1,0 +1,12 @@
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Release\netcoreapp3.1\BattleEngine.exe
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Release\netcoreapp3.1\BattleEngine.deps.json
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Release\netcoreapp3.1\BattleEngine.runtimeconfig.json
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Release\netcoreapp3.1\BattleEngine.runtimeconfig.dev.json
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Release\netcoreapp3.1\BattleEngine.dll
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Release\netcoreapp3.1\BattleEngine.pdb
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Release\netcoreapp3.1\BattleEngine.AssemblyInfoInputs.cache
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Release\netcoreapp3.1\BattleEngine.AssemblyInfo.cs
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Release\netcoreapp3.1\BattleEngine.csproj.CoreCompileInputs.cache
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Release\netcoreapp3.1\BattleEngine.dll
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Release\netcoreapp3.1\BattleEngine.pdb
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Release\netcoreapp3.1\BattleEngine.genruntimeconfig.cache

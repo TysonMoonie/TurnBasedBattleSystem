@@ -1,0 +1,26 @@
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.AssemblyInfoInputs.cache
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.AssemblyInfo.cs
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.csproj.CoreCompileInputs.cache
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.exe
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.deps.json
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.runtimeconfig.json
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.runtimeconfig.dev.json
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.dll
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.pdb
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.dll
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.pdb
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.genruntimeconfig.cache
+C:\Users\tyson\Documents\Programming Projects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.csprojAssemblyReference.cache
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.exe
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.deps.json
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.runtimeconfig.json
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.runtimeconfig.dev.json
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.dll
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\bin\Debug\netcoreapp3.1\BattleEngine.pdb
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.csprojAssemblyReference.cache
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.AssemblyInfoInputs.cache
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.AssemblyInfo.cs
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.csproj.CoreCompileInputs.cache
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.dll
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.pdb
+C:\Users\tyson\Documents\ProgrammingProjects\C#\BattleEngine\TurnBasedBattleSystem\TurnBasedBattleSystem\obj\Debug\netcoreapp3.1\BattleEngine.genruntimeconfig.cache
